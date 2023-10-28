@@ -129,7 +129,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            BUILD_ARCH=${{ matrix.architecture }}
+            BUILD_ARCH=${{ steps.flags.outputs.platform }}
             BUILD_DATE=${{ steps.flags.outputs.date }}
             BUILD_FROM=${{ steps.flags.outputs.from }}
             BUILD_NAME=${{ env.IMAGE_NAME }}
