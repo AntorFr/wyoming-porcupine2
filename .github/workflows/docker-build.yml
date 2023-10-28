@@ -114,7 +114,7 @@ jobs:
           context: .
           platforms: ${{ steps.flags.outputs.platform }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }},/wyoming-porcupine2:latest
+          tags: ${{ steps.meta.outputs.tags }}, wyoming-porcupine2:latest
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
