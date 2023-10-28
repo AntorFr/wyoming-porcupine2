@@ -109,18 +109,18 @@ jobs:
 
       - name: 🚀 Build and push Docker image
         uses: docker/build-push-action@v5.0.0
-        build-args: |
-          BUILD_ARCH=${{ matrix.architecture }}
-          BUILD_DATE=${{ steps.flags.outputs.date }}
-          BUILD_FROM=${{ steps.flags.outputs.from }}
-          BUILD_NAME=wyoming-porcupine2
-          BUILD_REF=${{ github.sha }}
-          BUILD_REPOSITORY=${{ github.repository }}
-          BUILD_VERSION=latest
         with:
           context: .
           platforms: ${{ steps.flags.outputs.platform }}
           push: true
           tags: ${{ steps.meta.outputs.tags }},/wyoming-porcupine2:latest
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BUILD_ARCH=${{ matrix.architecture }}
+            BUILD_DATE=${{ steps.flags.outputs.date }}
+            BUILD_FROM=${{ steps.flags.outputs.from }}
+            BUILD_NAME=wyoming-porcupine2
+            BUILD_REF=${{ github.sha }}
+            BUILD_REPOSITORY=${{ github.repository }}
+            BUILD_VERSION=latest
 
