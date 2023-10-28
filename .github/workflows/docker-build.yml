@@ -23,7 +23,7 @@ jobs:
     outputs:
       architectures: ${{ steps.info.outputs.architectures }}
       base_image_signer: ${{ steps.info.outputs.codenotary_base_image }}
-      build: ${{ steps.information.outputs.build }}
+      build: ${{ steps.info.outputs.build }}
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4
@@ -88,6 +88,7 @@ jobs:
       - name: ℹ️ Compose build flags
         id: flags
         run: |
+          echo "date=$(date +"%Y-%m-%dT%H:%M:%SZ")" >> "$GITHUB_OUTPUT"
           from=$(yq --no-colors eval ".build_from.${{ matrix.architecture }}" "${{ needs.information.outputs.build }}")
           echo "from=${from}" >> "$GITHUB_OUTPUT"
 
@@ -105,7 +106,7 @@ jobs:
             echo "::error ::Could not determine platform for architecture ${{ matrix.architecture }}"
             exit 1
           fi
-          echo "date=$(date +"%Y-%m-%dT%H:%M:%SZ")" >> "$GITHUB_OUTPUT"
+
 
       - name: 🚀 Build and push Docker image
         uses: docker/build-push-action@v5.0.0
