@@ -81,7 +81,7 @@ jobs:
       - name: 🏗 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.0.0
       - name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -119,15 +119,14 @@ jobs:
             exit 1
           fi
 
-
       - name: 🚀 Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: ${{ steps.flags.outputs.platform }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags}}
+          labels: ${{ steps.meta.outputs.labels}}
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
             BUILD_DATE=${{ steps.flags.outputs.date }}
@@ -137,3 +136,32 @@ jobs:
             BUILD_REPOSITORY=${{ github.repository }}
             BUILD_VERSION=latest
 
+  #build-manifest:
+  #  needs:
+  #    - information
+  #    - build
+  #  runs-on: ubuntu-latest
+  #  timeout-minutes: 10
+  #  steps:
+  #    - uses: docker/login-action@v3
+  #      with:
+  #        registry: ghcr.io
+  #        username: ${{ github.actor }}
+  #        password: ${{ secrets.GITHUB_TOKEN }}
+  #    - name: Extract metadata (tags, labels) for Docker
+  #      id: meta
+  #      uses: docker/metadata-action@v5
+  #      with:
+  #        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+  #        tags: |
+  #          type=ref,event=branch
+  #          type=ref,event=pr
+  #          type=semver,pattern={{version}}
+  #          type=semver,pattern={{major}}.{{minor}}
+  #    - name: Create and push manifest images
+  #      uses: Noelware/docker-manifest-action@master 
+  #      with:
+  #      TODO: Get tag and list of image from matrix      
+  #          inputs: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
+  #          images:  ${{ fromJson(needs.information.outputs.architectures) }}
+  #          push: true
