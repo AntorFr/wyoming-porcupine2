@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "type": "docker-run",
+        "label": "docker-run: debug",
+        "dependsOn": ["docker-build"],
+        "dockerRun": {
+          "containerName": "wyomingporcupine3",
+          "image": "wyomingporcupine3:latest",
+          "env": {
+            "TZ": "Europe/Paris",
+            "SENSITIVITY": "0.5",
+            "ACCESS_KEY": "AQ52HwVN4zbi42jbVPSfFeoFG08g3VokPjjGyLXozrAV8U6DFDfaQQ=="
+          },
+          "volumes": [
+            {
+              "containerPath": "/app",
+              "localPath": "${workspaceFolder}"
+            }
+          ],
+          "ports": [
+            {
+              "containerPort": 10400,
+              "hostPort": 10400
+            }
+          ]
+        }
+    },
+    {
+      "label": "docker-build: wyomingporcupine3",
+      "type": "docker-build",
+      "dockerBuild": {
+          "context": "${workspaceFolder}",
+          "dockerfile": "${workspaceFolder}/Dockerfile",
+          "tag": "wyomingporcupine3:latest",
+          "buildArgs" : {"BUILD_FROM": "ghcr.io/home-assistant/aarch64-base-debian:bookworm"}   
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@ FROM ${BUILD_FROM}
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Install Porcupine 2
+# Install Porcupine 3
 WORKDIR /usr/src
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
@@ -33,5 +33,5 @@ COPY rootfs /
 HEALTHCHECK --start-period=10m \
     CMD echo '{ "type": "describe" }' \
         | nc -w 1 localhost 10400 \
-        | grep -iq "porcupine2" \
+        | grep -iq "porcupine3" \
         || exit 1

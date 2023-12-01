@@ -1,7 +1,7 @@
 #!/command/with-contenv bashio
 # shellcheck shell=bash
 # ==============================================================================
-# Start Porcupine 2 service
+# Start Porcupine 3 service
 # ==============================================================================
 flags=()
 

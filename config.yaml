@@ -1,9 +1,9 @@
 ---
 version: 1.0.3
-slug: porcupine2
-name: Porcupine 2
-description: Porcupine 2 using the Wyoming protocol
-url: https://github.com/piitaya/rhasspy-hassio-addons/tree/master/porcupine2
+slug: porcupine3
+name: Porcupine 3
+description: Porcupine 3 using the Wyoming protocol
+url: https://github.com/piitaya/rhasspy-hassio-addons/tree/master/porcupine3
 arch:
   - amd64
   - aarch64

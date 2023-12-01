@@ -22,7 +22,6 @@ _DIR = Path(__file__).parent
 
 DEFAULT_KEYWORD = "porcupine"
 
-
 @dataclass
 class Keyword:
     """Single porcupine keyword"""
@@ -101,7 +100,7 @@ async def main() -> None:
     wyoming_info = Info(
         wake=[
             WakeProgram(
-                name="porcupine2",
+                name="porcupine3",
                 description="On-device wake word detection powered by deep learning ",
                 attribution=Attribution(
                     name="Picovoice", url="https://github.com/Picovoice/porcupine"
@@ -132,7 +131,7 @@ async def main() -> None:
     server = AsyncServer.from_uri(args.uri)
 
     try:
-        await server.run(partial(Porcupine2EventHandler, wyoming_info, args, state))
+        await server.run(partial(porcupine3EventHandler, wyoming_info, args, state))
     except KeyboardInterrupt:
         pass
 
@@ -140,7 +139,7 @@ async def main() -> None:
 # -----------------------------------------------------------------------------
 
 
-class Porcupine2EventHandler(AsyncEventHandler):
+class porcupine3EventHandler(AsyncEventHandler):
     """Event handler for clients."""
 
     def __init__(
