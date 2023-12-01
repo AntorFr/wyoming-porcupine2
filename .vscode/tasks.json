@@ -11,7 +11,7 @@
           "env": {
             "TZ": "Europe/Paris",
             "SENSITIVITY": "0.5",
-            "ACCESS_KEY": "AQ52HwVN4zbi42jbVPSfFeoFG08g3VokPjjGyLXozrAV8U6DFDfaQQ=="
+            "ACCESS_KEY": "<SECRET_TOKEN>"
           },
           "volumes": [
             {
@@ -34,7 +34,7 @@
           "context": "${workspaceFolder}",
           "dockerfile": "${workspaceFolder}/Dockerfile",
           "tag": "wyomingporcupine3:latest",
-          "buildArgs" : {"BUILD_FROM": "ghcr.io/home-assistant/aarch64-base-debian:bookworm"}   
+          "buildArgs" : {"BUILD_FROM": "ghcr.io/home-assistant/amd64-base-debian:bookworm"}   
       }
     }
   ]
